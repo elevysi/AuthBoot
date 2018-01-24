@@ -5,5 +5,6 @@ import com.elevysi.site.auth.entity.User;
 public interface UserDAO {
 	
 	public User save(User user);
+	public User loadByUsername(String username);
 
 }

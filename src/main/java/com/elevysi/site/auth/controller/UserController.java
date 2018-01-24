@@ -24,8 +24,8 @@ import com.elevysi.site.auth.service.UserService;
 
 
 @RestController
-@EnableAuthorizationServer
-@EnableResourceServer
+//@EnableAuthorizationServer
+//@EnableResourceServer
 public class UserController extends AbstractController{
 	
 	@RequestMapping(value="/user", produces="application/json")

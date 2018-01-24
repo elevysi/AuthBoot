@@ -20,5 +20,9 @@ public class UserService extends AbstractService{
 	public User saveUser(User user){
 		return userDAO.save(user);
 	}
+	
+	public User loadUserByUsername(String username){
+		return userDAO.loadByUsername(username);
+	}
 
 }

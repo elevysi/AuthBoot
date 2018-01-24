@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
@@ -40,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception{
 		http
 		.authorizeRequests()
+//			.antMatchers("/oauth/token").permitAll()
 			.anyRequest().authenticated()
 		.and()
 		.sessionManagement()
@@ -48,6 +51,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.csrf()
 			.disable();
 		
+//		http
+//        .csrf().disable()
+//        .anonymous().disable()
+//        .authorizeRequests()
+//        .antMatchers("/oauth/token").permitAll();
+		
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
 	}
 
 }
