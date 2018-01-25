@@ -1,6 +1,7 @@
 package com.elevysi.site.auth.test.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.elevysi.site.auth.AuthBootApplication;
@@ -32,7 +34,8 @@ public class UserDAOTest {
 		user.setLast_name("Doe");
 		user.setEmail("johnny@elevysi.com");
 		user.setUsername("johnnie");
-		user.setPassword("passHere");
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode("passHere"));
 	}
 	
 	@Test
@@ -41,8 +44,10 @@ public class UserDAOTest {
 		assertEquals(user.getUsername(), savedUser.getUsername());
 		assertEquals(user.getFirst_name(), savedUser.getFirst_name());
 		assertEquals(user.getLast_name(), savedUser.getLast_name());
-		assertEquals(user.getPassword(), savedUser.getPassword());
 		assertEquals(user.getEmail(), savedUser.getEmail());
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		assertTrue(encoder.matches("passHere", savedUser.getPassword()));
 		
 	}
 }

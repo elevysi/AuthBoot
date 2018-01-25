@@ -28,6 +28,15 @@ import com.elevysi.site.auth.service.UserService;
 //@EnableResourceServer
 public class UserController extends AbstractController{
 	
+	
+	private UserService userService;
+	
+	@Autowired
+	public UserController(UserService userService){
+		this.userService = userService;
+	}
+	
+	
 	@RequestMapping(value="/user", produces="application/json")
 	public Map<String, Object> user(OAuth2Authentication user){
 		Map<String, Object> userInfo = new HashMap<>();
@@ -36,5 +45,23 @@ public class UserController extends AbstractController{
 		return userInfo;
 	}
 	
+	
+	@RequestMapping(value="/add", method=RequestMethod.GET)
+	public String add(Model model){
+		User user = new User();
+		user.setUuid(User.generateStaticUUID());
+		model.addAttribute("user", user);
+		return "addUser";
+	}
+	
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	public String doAdd(Model model, @Valid @ModelAttribute("user")User user, BindingResult result, RedirectAttributes redirectAttributes){
+//		if(result.hasErrors()){
+//			return "addUser";
+//		}
+		userService.saveUser(user);
+		
+		return "addUser";
+	}
 
 }

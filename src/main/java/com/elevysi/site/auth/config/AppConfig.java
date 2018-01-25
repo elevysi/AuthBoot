@@ -10,10 +10,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 public class AppConfig extends ResourceServerConfigurerAdapter{
 	
-	private static final String RESOURCE_ID = "my_rest_api";
-    
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
-        resources.resourceId(RESOURCE_ID).stateless(false);
-    }
+//	private static final String RESOURCE_ID = "my_rest_api";
+//    
+//    @Override
+//    public void configure(ResourceServerSecurityConfigurer resources) {
+//        resources.resourceId(RESOURCE_ID).stateless(false);
+//    }
 }
