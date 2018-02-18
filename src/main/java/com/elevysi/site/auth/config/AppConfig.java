@@ -48,7 +48,7 @@ public class AppConfig extends ResourceServerConfigurerAdapter{
 			}
 
 		}));
-		resource.setOrder(3);
+		resource.setOrder(9);
 
 		return resource;
 
@@ -79,7 +79,7 @@ public class AppConfig extends ResourceServerConfigurerAdapter{
 //                .antMatchers("/api/**").authenticated();
 			}
 		}));
-		resource.setOrder(4);
+		resource.setOrder(10);
 
 		return resource;
 
